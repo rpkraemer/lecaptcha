@@ -2,14 +2,14 @@ LeCaptcha
 
 ## Introducao
 
-Este projeto e uma pequena biblioteca para facilitar a criação de captchas (apenas imagem). 
-Com ele e possível gerar captchas a partir de palavras gravadas em um arquivo ou gerar com caracteres aleatorios,
+Este projeto e uma pequena biblioteca para facilitar a criacao de captchas (apenas imagem). 
+Com ele e possivel gerar captchas a partir de palavras gravadas em um arquivo ou gerar com caracteres aleatorios,
 e possivel escolher o numero de palavras em cada captcha, quantos captchas deverao ser gerados e o diretorio onde serao
 colocados.
 
 ## Onde Usar
 
-Voce pode usar este projeto em qualquer aplicaçao que necessitar de uma soluçao simples e rapida para captchas visuais.
+Voce pode usar este projeto em qualquer aplicacao que necessitar de uma solucao simples e rapida para captchas visuais.
 
 #Exemplos
 
