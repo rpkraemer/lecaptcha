@@ -2,14 +2,14 @@ LeCaptcha
 
 ## Introducao
 
-Este projeto é uma pequena biblioteca para facilitar a criação de captchas (apenas imagem). 
-Com ele é possível gerar captchas a partir de palavras gravadas em um arquivo ou gerar com caracteres aleatórios,
-é possível escolher o número de palavras em cada captcha, quantos captchas deverão ser gerados e o diretório onde serão
+Este projeto e uma pequena biblioteca para facilitar a criação de captchas (apenas imagem). 
+Com ele e possível gerar captchas a partir de palavras gravadas em um arquivo ou gerar com caracteres aleatorios,
+e possivel escolher o numero de palavras em cada captcha, quantos captchas deverao ser gerados e o diretorio onde serao
 colocados.
 
 ## Onde Usar
 
-Você pode usar este projeto em qualquer aplicação que necessitar de uma solução simples e rápida para captchas visuais.
+Voce pode usar este projeto em qualquer aplicaçao que necessitar de uma soluçao simples e rapida para captchas visuais.
 
 #Exemplos
 
@@ -34,5 +34,5 @@ Você pode usar este projeto em qualquer aplicação que necessitar de uma solução 
 		ONDE os captchas devem ser gerados (generateAt())
 		DIMENSOES de cada captcha (withDimensions(200, 60) - 200 width e 60 height)
 		cada um dos captchas com 2 palavras (captchasWith(2).words())
-		e finalmente, mandamos renderizar os captchas passando por parâmetro a QUANTIDADE desejada (render(5))
-		o método render possui uma sobrecarga sem parâmetros (render()) nesse caso, gera-se apenas 1 captcha
+		e finalmente, mandamos renderizar os captchas passando por parametro a QUANTIDADE desejada (render(5))
+		o metodo render possui uma sobrecarga sem parametros (render()) nesse caso, gera-se apenas 1 captcha
