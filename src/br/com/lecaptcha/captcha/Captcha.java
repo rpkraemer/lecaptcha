@@ -12,6 +12,12 @@ public class Captcha {
 	private String captchaLocation;
 	private String answer;
 	private Long ID;
+	private byte[] imageInBytes;
+	
+	public Captcha(String answer, Long ID) {
+		this.answer = answer;
+		this.ID = ID;
+	}
 	
 	public Captcha(String captchaLocation, String answer, Long ID) {
 		this.captchaLocation = captchaLocation;
@@ -33,5 +39,11 @@ public class Captcha {
 	}
 	public Long getID() {
 		return ID;
+	}
+	public byte[] getImageInBytes() {
+		return imageInBytes;
+	}
+	public void setImageInBytes(byte[] imageInBytes) {
+		this.imageInBytes = imageInBytes;
 	}
 }

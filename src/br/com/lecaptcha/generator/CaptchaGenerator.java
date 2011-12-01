@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -116,6 +117,8 @@ public class CaptchaGenerator {
 		return (char) ascii;
 	}
 
+	/* ************ MÉTODOS PÚBLICOS DE RENDERIZAÇÃO *************** - INICIO */
+	
 	public boolean render() {
 		if (this.w <= 0 || this.h <= 0)
 			throw new IllegalArgumentException("As dimensões do captcha devem ser informadas");
@@ -124,6 +127,25 @@ public class CaptchaGenerator {
 		if (this.pathname == null)
 			throw new IllegalArgumentException("O diretório de destino dos captchas deve ser informado");
 		
+		String[] words = this.renderCaptcha();
+		return saveCaptchaAtDisk(words);
+	}
+	
+	public boolean render(int captchas) {
+		while (captchas-- > 0)
+			if (!this.render())
+				return false;
+		return true;
+	}
+	
+	public boolean renderInMemory() {
+		String[] words =  this.renderCaptcha();
+		return this.saveCaptchaInMemory(words);
+	}
+	
+	/* ************ MÉTODOS PÚBLICOS DE RENDERIZAÇÃO *************** - FINAL*/
+	
+	private String[] renderCaptcha() {
 		this.captcha = new BufferedImage(this.w, this.h, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = this.captcha.createGraphics();
 		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
@@ -151,8 +173,28 @@ public class CaptchaGenerator {
 			w += this.wcr != null ? 12 : 15;
 		}
 		g2d.dispose();
+		return words;
+	}
+	
+	private boolean saveCaptchaInMemory(String [] words) {
+		ByteArrayOutputStream imageBuff = new ByteArrayOutputStream();
+		int captchaID = this.words().hashCode() + new Date().hashCode() + this.random.nextInt();
+		if (captchaID < 0) captchaID *= -1;
 		
-		return saveCaptchaAtDisk(words);
+		try {
+			if (ImageIO.write(this.captcha, "JPG", imageBuff)) {
+				String answer = "";
+				for (String word : words) 
+					answer += word + " ";
+				Captcha captcha = new Captcha(answer, new Long(captchaID));
+				captcha.setImageInBytes(imageBuff.toByteArray());
+				this.captchas.add(captcha);
+				return true;
+			}
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Não foi possível gerar a imagem do captcha em memória");
+		}
+		return false;
 	}
 	
 	private boolean saveCaptchaAtDisk(String [] words) {
@@ -202,12 +244,5 @@ public class CaptchaGenerator {
 		G = this.random.nextInt(100);
 		B = this.random.nextInt(5);
 		return new Color(R, G, B);
-	}
-
-	public boolean render(int captchas) {
-		while (captchas-- > 0)
-			if (!this.render())
-				return false;
-		return true;
 	}
 }

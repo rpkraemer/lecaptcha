@@ -17,13 +17,13 @@ public class CaptchaGeneratorTests {
 
 	@Before
 	public void setUp() throws FileNotFoundException, IOException {
-		this.wcr = new WordsCaptchaReader("C:/Documents and Settings/Robson Kraemer", 
-										  "captcha_pt.txt").withRandomWordsSeparator("#");
+		this.wcr = new WordsCaptchaReader("C:/Users/Robson/Desktop/captchas", 
+										  "captcha.txt").withRandomWordsSeparator("#");
 		this.cg = new CaptchaGenerator();
 	}
 
 	private String givenAValidDestinationPathForCaptchas() {
-		return "C:/Documents and Settings/Robson Kraemer/captchas";
+		return "C:/Users/Robson/Desktop/captchas";
 	}
 
 	private String givenAInvalidDestinationPathForCaptchas() {
@@ -104,6 +104,29 @@ public class CaptchaGeneratorTests {
 		Assert.assertEquals(3, captcha2.length);
 		//Third captcha
 		Assert.assertEquals(3, captcha3.length);
+	}
+	
+	@Test
+	public void testShouldGenerateOneCaptchaWithOneWordInMemory() {
+		this.cg.withDimensions(200, 30).
+				captchasWith(1).words().
+				renderInMemory();
+		Captcha captcha = this.cg.getGeneratedCaptchas().get(0);
+		
+		Assert.assertNotNull(captcha.getImageInBytes());
+	}
+	
+	@Test
+	public void testShouldGenerateOneCaptchaWithFourWordsInMemory() {
+		this.cg.withDimensions(200, 90).
+				captchasWith(4).words().
+				renderInMemory();
+		Captcha captcha = this.cg.getGeneratedCaptchas().get(0);
+		String[] captchaWords = captcha.getAnswer().split(" ");
+		
+		Assert.assertNotNull(captcha.getImageInBytes());
+		Assert.assertEquals(1, this.cg.getGeneratedCaptchas().size());
+		Assert.assertEquals(4, captchaWords.length);
 	}
 	
 	/* ******************************** TESTES COM O READER ************************************* */

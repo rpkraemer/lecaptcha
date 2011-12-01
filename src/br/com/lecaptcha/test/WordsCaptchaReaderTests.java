@@ -23,12 +23,12 @@ public class WordsCaptchaReaderTests {
 	}
 	
 	private String givenAValidCaptchaFile() {
-		//CONTEÚDO DO ARQUIVO captcha_pt_txt deve ser em 1 linha: teste,gol,bola,chico bento
-		return "captcha_pt.txt";
+		//CONTEÚDO DO ARQUIVO captcha_pt_txt deve ser em 1 linha: teste,gol,bola,brasil
+		return "captcha.txt";
 	}
 
 	private String givenAValidPath() {
-		return "C:/Documents and Settings/Robson Kraemer";
+		return "C:/Users/Robson/Desktop/captchas";
 	}
 	
 	@Test
