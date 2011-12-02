@@ -184,8 +184,11 @@ public class CaptchaGenerator {
 		try {
 			if (ImageIO.write(this.captcha, "JPG", imageBuff)) {
 				String answer = "";
-				for (String word : words) 
-					answer += word + " ";
+				for (int i = 0; i < words.length; i++) 
+					if (i != words.length - 1)
+						answer += words[i] + " ";
+					else
+						answer += words[i];
 				Captcha captcha = new Captcha(answer, new Long(captchaID));
 				captcha.setImageInBytes(imageBuff.toByteArray());
 				this.captchas.add(captcha);
@@ -205,8 +208,11 @@ public class CaptchaGenerator {
 
 			if (ImageIO.write(this.captcha, "JPG", targetFile)) {
 				String answer = "";
-				for (String word : words) 
-					answer += word + " ";
+				for (int i = 0; i < words.length; i++)
+					if (i != words.length - 1)
+						answer += words[i] + " ";
+					else
+						answer += words[i];
 				this.captchas.add(new Captcha(targetFile.getAbsolutePath(), answer.trim(), new Long(targetFileName)));
 				return true;
 			}
@@ -245,4 +251,6 @@ public class CaptchaGenerator {
 		B = this.random.nextInt(5);
 		return new Color(R, G, B);
 	}
+
+	
 }
