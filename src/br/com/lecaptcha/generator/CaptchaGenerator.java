@@ -88,7 +88,7 @@ public class CaptchaGenerator {
 		
 		if (nrWords == 0) throw new IllegalArgumentException("A quantidade de palavras a ser gerada deve ser maior que 0");
 		
-		int qtyChars = this.random.nextInt(10);
+		int qtyChars = this.random.nextInt(7);
 		if (qtyChars <= 5) qtyChars = 5;
 		
 		String words = "";

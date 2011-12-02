@@ -19,9 +19,10 @@ public class CaptchaTagLib extends SimpleTagSupport {
 		
 		String contextPath = context.getServletContext().getContextPath();
 		try {		
-			String imgHtmlTag = "<img src=\"" + contextPath + "/captcha" + "\" alt=\"\"/>";
+			String imgHtmlTag = "<img id=\"captchaImage\" src=\"" + contextPath + "/captcha" + "\" alt=\"\"/>";
 			String answerBox = "<input type=\"text\" name=\"captchaAnswer\" id=\"captchaAnswer\"/>";
-			writer.write(imgHtmlTag + "<br/>" + answerBox);
+			String reloadPage = "<a onclick=\"javascript:window.location.reload()\">Trocar Imagem</a>";
+			writer.write(imgHtmlTag + "<br/>" + answerBox + "&nbsp;" + reloadPage);
 		} catch (IOException e) { 
 			
 		}
